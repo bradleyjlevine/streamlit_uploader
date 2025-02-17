@@ -1,0 +1,13 @@
+channels:
+  - defaults
+  - conda-forge
+ssl_verify: true
+show_channel_urls: true
+auto_update_conda: true
+bzip_compression_level: 9
+bzip_compression_method: gzip
+default_packages:
+  - elasticsearch>8.16
+  - pandas
+  - pyarrow
+  - ipykernel

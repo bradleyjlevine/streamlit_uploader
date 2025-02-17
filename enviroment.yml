@@ -1,0 +1,12 @@
+name: elastic
+channels:
+  - defaults
+dependencies:
+  - python=3.11
+  - ipykernel
+  - pandas
+  - polaris
+  - pyarrow
+  - elasticsearch>8.16
+  - streamlit
+  - requests

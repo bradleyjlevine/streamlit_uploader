@@ -1,0 +1,8 @@
+{
+    "debug": true,
+    "s3_storage": false,
+    "s3_bucket": null,
+    "local_storage": true,
+    "index_prefix": "file-uploads."
+}
+
