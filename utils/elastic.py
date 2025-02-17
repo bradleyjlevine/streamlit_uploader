@@ -240,3 +240,35 @@ def bulk_update_documents(index_name, df):
     except Exception as e:
         st.error(f"Error executing bulk update: {str(e)}")
         return 0, len(actions)
+    
+def list_enrich_policies():
+
+    es = elasticsearch.Elasticsearch(
+    cloud_id=st.session_state["cloud_id"],
+    api_key=st.session_state["api_key"],
+    verify_certs=True,
+    request_timeout=60,
+    max_retries=3,
+    retry_on_status=[429],
+    http_compress=True)
+
+    response = es.enrich.get_policy()
+
+    if "policies" in response and len(response["policies"]) > 0:
+        st.success("Enrich policies retrieved successfully")
+    
+        policies= []
+
+        for policy in response["policies"]:
+            policies.append({
+                "name": policy["config"][list(policy["config"].keys())[0]]["name"],
+                "type": list(policy["config"].keys())[0],
+                "indices": policy["config"][list(policy["config"].keys())[0]]["indices"],
+                "match_field":  policy["config"][list(policy["config"].keys())[0]]["match_field"],
+                "enrich_fields": policy["config"][list(policy["config"].keys())[0]]["enrich_fields"]})
+
+        return policies
+    else:
+        st.error("No policies found")
+        return None
+
