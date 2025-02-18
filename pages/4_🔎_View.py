@@ -5,6 +5,7 @@ from utils.session import get_session, logout, is_session_expired
 
 def show_view():
     """Fetch and display uploaded files from Elasticsearch with pagination."""
+    st.set_page_config(layout="wide")
     st.title("📄 View Uploaded File")
 
     session = get_session()

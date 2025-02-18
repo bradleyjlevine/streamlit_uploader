@@ -5,6 +5,7 @@ from utils.session import get_session, logout, is_session_expired
 
 def show_delete():
     """Delete documents from Elasticsearch with data preview."""
+    st.set_page_config(layout="wide")
     st.title("🗑️ Delete Documents")
 
     session = get_session()

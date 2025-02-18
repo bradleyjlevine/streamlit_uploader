@@ -6,6 +6,7 @@ from utils.session import get_session, logout, is_session_expired
 
 def show_download():
     """Download full Elasticsearch indices."""
+    st.set_page_config(layout="wide")
     st.title("📥 Download Full Index")
 
     session = get_session()

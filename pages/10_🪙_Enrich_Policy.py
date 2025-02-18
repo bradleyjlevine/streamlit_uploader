@@ -6,6 +6,7 @@ from utils.elastic import list_enrich_policies
 
 def show_enrich_policy():
     """Bulk update Elasticsearch documents using a CSV file."""
+    st.set_page_config(layout="wide")
     st.title("Enrich Policy")
 
     session = get_session()

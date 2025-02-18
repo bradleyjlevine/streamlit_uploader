@@ -5,6 +5,8 @@ import pandas as pd
 
 def show_file_list():
     """Displays a list of uploaded files and their corresponding indices."""
+    st.set_page_config(layout="wide")
+    
     st.title("📂 Uploaded Files")
 
     session = get_session()

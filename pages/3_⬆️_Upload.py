@@ -5,6 +5,8 @@ from utils.session import get_session, logout, is_session_expired
 
 def show_upload():
     """Handles CSV file uploads with optional type overrides."""
+    st.set_page_config(layout="wide")
+    
     st.title("📤 Upload CSV File")
 
     session = get_session()

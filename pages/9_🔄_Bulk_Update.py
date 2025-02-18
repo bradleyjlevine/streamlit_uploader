@@ -5,6 +5,7 @@ from utils.session import get_session, logout, is_session_expired
 
 def show_bulk_update():
     """Bulk update Elasticsearch documents using a CSV file."""
+    st.set_page_config(layout="wide")
     st.title("📂 Bulk Update Documents")
 
     session = get_session()

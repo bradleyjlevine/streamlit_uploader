@@ -241,8 +241,11 @@ def bulk_update_documents(index_name, df):
         st.error(f"Error executing bulk update: {str(e)}")
         return 0, len(actions)
     
-def list_enrich_policies():
-
+def list_enrich_policies() -> list:
+    if "authenticated" not in st.session_state or not st.session_state["authenticated"]:
+        st.error("Not authenticated. Please log in first.")
+        return []
+    
     es = elasticsearch.Elasticsearch(
     cloud_id=st.session_state["cloud_id"],
     api_key=st.session_state["api_key"],
@@ -271,4 +274,71 @@ def list_enrich_policies():
     else:
         st.error("No policies found")
         return None
+    
+def create_enrich_policy(name: str, type: str, indices: str, match_field: str, enrich_fields: str) -> bool:
+    if "authenticated" not in st.session_state or not st.session_state["authenticated"]:
+        st.error("Not authenticated. Please log in first.")
+        return False
+    
+    es = elasticsearch.Elasticsearch(
+    cloud_id=st.session_state["cloud_id"],
+    api_key=st.session_state["api_key"],
+    verify_certs=True,
+    request_timeout=60,
+    max_retries=3,
+    retry_on_status=[429],
+    http_compress=True)
+
+    if len(es.enrich.get_policy(name=name)["policies"]) == 0:
+        try:
+            if type == "match":
+                es.enrich.put_policy(name=name,
+                                     match={
+                                         "indices": indices.replace(" ", "").split(","),
+                                         "match_field": match_field,
+                                         "enrich_fields": enrich_fields.replace(" ", "").split(","),
+                                     })
+            elif type == "range":
+                es.enrich.put_policy(name=name,
+                                     range={
+                                         "indices": indices.replace(" ", "").split(","),
+                                         "match_field": match_field,
+                                         "enrich_fields": enrich_fields.replace(" ", "").split(","),
+                                     })
+            return True
+        except Exception as e:
+            print(e)
+            st.error(f"Error creating policy: {e}")
+    else:
+        st.warning(f"Policy '{name}' already exists.")
+
+    return False
+
+def execute_enrich_policy(name: str) -> bool:
+    if "authenticated" not in st.session_state or not st.session_state["authenticated"]:
+        st.error("Not authenticated. Please log in first.")
+        return False
+    
+    es = elasticsearch.Elasticsearch(
+    cloud_id=st.session_state["cloud_id"],
+    api_key=st.session_state["api_key"],
+    verify_certs=True,
+    request_timeout=60,
+    max_retries=3,
+    retry_on_status=[429],
+    http_compress=True)
+
+    if len(es.enrich.get_policy(name=name)["policies"])>0:
+        try:
+            es.enrich.execute_policy(name=name)
+            st.success(f"Policy '{name}' executed successfully.")
+            return True
+        except Exception as e:
+            print(e)
+            st.error(f"Error executing policy: {e}")
+
+    else:
+        st.error(f"Policy '{name}' does not exist. Please create it first.")
+        return False
+
 

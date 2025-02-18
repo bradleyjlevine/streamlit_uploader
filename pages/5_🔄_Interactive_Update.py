@@ -6,6 +6,7 @@ from utils.session import get_session, logout, is_session_expired
 
 def show_edit():
     """Minimal interactive editor for updating Elasticsearch data."""
+    st.set_page_config(layout="wide")
     st.title("✏️ Edit Data")
 
     session = get_session()

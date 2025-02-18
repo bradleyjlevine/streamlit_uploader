@@ -6,6 +6,7 @@ from utils.session import get_session, logout, is_session_expired
 
 def show_add():
     """Add new documents to Elasticsearch with suggested fields."""
+    st.set_page_config(layout="wide")
     st.title("➕ Add New Documents")
 
     session = get_session()

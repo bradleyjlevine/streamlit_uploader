@@ -2,6 +2,8 @@ import streamlit as st
 from utils.auth import authenticate_elasticsearch
 from utils.session import set_session, is_session_expired, logout
 
+st.set_page_config(layout="wide")
+
 st.title("🔑 Login to Elasticsearch")
 
 if is_session_expired():

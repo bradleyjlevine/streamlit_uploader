@@ -1,6 +1,5 @@
 import streamlit as st
 from utils.session import get_session, logout, is_session_expired
-from utils.config import set_theme
 
 st.set_page_config(
     page_title="Elasticsearch Uploader",
