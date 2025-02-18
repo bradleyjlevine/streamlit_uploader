@@ -17,13 +17,6 @@ def show_view():
     if is_session_expired():
         logout()
 
-    if "view_df" in st.session_state:
-        del st.session_state["view_df"]
-    if "page_number" in st.session_state:
-        del st.session_state["page_number"]
-    if "page_size" in st.session_state:
-        del st.session_state["page_size"]
-
     # Fetch available indices
     indices = list_uploaded_files()
     index_names = [file["File Name"] for file in indices]

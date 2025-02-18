@@ -17,9 +17,6 @@ def show_delete():
     if is_session_expired():
         logout()
 
-    if "delete_df" in st.session_state:
-        del st.session_state["delete_df"]
-
     # Fetch available indices
     indices = list_uploaded_files()
     index_names = [file["File Name"] for file in indices]
@@ -30,8 +27,12 @@ def show_delete():
 
     selected_index = st.selectbox("Select an index to delete documents from", index_names)
 
+    # User can optionally specify a Lucene query
+    st.subheader("🔍 Optional Lucene Query")
+    lucene_query = st.text_area("Enter a Lucene query to filter documents (leave empty for all)", "")
+
     if st.button("Load Data"):
-        data = fetch_index_data(selected_index, size=10)  # Fetch a preview of documents
+        data = fetch_index_data(selected_index, lucene_query, size=100)  # Fetch a preview of documents
         if data:
             df = pd.DataFrame(data)
             if "_id" not in df.columns:
