@@ -18,6 +18,8 @@ def show_add():
     if is_session_expired():
         logout()
 
+    del st.session_state["new_docs"]
+
     # Fetch available indices
     indices = list_uploaded_files()
     index_names = [file["File Name"] for file in indices]

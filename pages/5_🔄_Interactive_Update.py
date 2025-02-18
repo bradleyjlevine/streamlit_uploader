@@ -18,6 +18,8 @@ def show_edit():
     if is_session_expired():
         logout()
 
+    del st.session_state["data_df"]
+
     # Fetch available indices
     indices = list_uploaded_files()
     index_names = [file["File Name"] for file in indices]
