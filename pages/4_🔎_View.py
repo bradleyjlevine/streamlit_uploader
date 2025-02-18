@@ -17,7 +17,12 @@ def show_view():
     if is_session_expired():
         logout()
 
-    del st.session_state["view_df"]
+    if "view_df" in st.session_state:
+        del st.session_state["view_df"]
+    if "page_number" in st.session_state:
+        del st.session_state["page_number"]
+    if "page_size" in st.session_state:
+        del st.session_state["page_size"]
 
     # Fetch available indices
     indices = list_uploaded_files()
@@ -42,7 +47,7 @@ def show_view():
         st.session_state.page_size = 10
 
     # Row selection per page
-    st.session_state.page_size = st.selectbox("Rows per page", [10, 20, 50, 100], index=1)
+    st.session_state.page_size = st.selectbox("Rows per page", [10, 20, 50, 100], index=0)
 
     if st.button("🔄 Load Data"):
         data = fetch_index_data(selected_index, lucene_query)

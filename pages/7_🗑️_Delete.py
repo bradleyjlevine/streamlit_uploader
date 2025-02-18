@@ -17,7 +17,8 @@ def show_delete():
     if is_session_expired():
         logout()
 
-    del st.session_state["delete_df"]
+    if "delete_df" in st.session_state:
+        del st.session_state["delete_df"]
 
     # Fetch available indices
     indices = list_uploaded_files()

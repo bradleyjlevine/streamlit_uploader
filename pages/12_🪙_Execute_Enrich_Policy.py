@@ -25,5 +25,4 @@ def execute_enrich_policy():
                 eep(policy_name)
 
 if __name__ == "__main__":
-    """Main function to run the Streamlit app."""
     execute_enrich_policy()

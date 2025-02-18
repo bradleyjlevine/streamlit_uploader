@@ -18,7 +18,8 @@ def show_download():
     if is_session_expired():
         logout()
 
-    del st.session_state["download_df"]
+    if "download_df" in st.session_state:
+        del st.session_state["download_df"]
 
     # Fetch available indices
     indices = list_uploaded_files()
