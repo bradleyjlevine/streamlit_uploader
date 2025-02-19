@@ -20,3 +20,8 @@ You can use the `enviroment.yml` to create a conda enviroment with the necessary
 
 `Demos`
 
+![](https://github.com/bradleyjlevine/streamlit_uploader/blob/master/demo/2025-02-18_20-58-10.gif)
+
+![](https://github.com/bradleyjlevine/streamlit_uploader/blob/master/demo/2025-02-18_20-58-57.gif)
+
+![](https://github.com/bradleyjlevine/streamlit_uploader/blob/master/demo/2025-02-18_20-59-50.gif)
