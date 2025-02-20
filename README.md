@@ -25,3 +25,5 @@ You can use the `enviroment.yml` to create a conda enviroment with the necessary
 ![](https://github.com/bradleyjlevine/streamlit_uploader/blob/master/demo/2025-02-18_20-58-57.gif)
 
 ![](https://github.com/bradleyjlevine/streamlit_uploader/blob/master/demo/2025-02-18_20-59-50.gif)
+
+![](https://github.com/bradleyjlevine/streamlit_uploader/blob/master/demo/2025-02-19_20-32-36.gif)
